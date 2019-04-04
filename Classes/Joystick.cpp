@@ -130,7 +130,7 @@ float Joystick::getDirection() const
 {
     if(_isActive)
     {
-        return  CC_RADIANS_TO_DEGREES( -(_joystickSprite->getPosition() - _mainPosition).getAngle());
+        return  180 - CC_RADIANS_TO_DEGREES( (-_joystickSprite->getPosition() + _mainPosition).getAngle());
     }
     else{
         return 0.0f;
@@ -152,12 +152,12 @@ float Joystick::getIntensity()
     if(_isActive)
     {
         
-        return clampf(_joystickSprite->getPosition().distanceSquared(_mainPosition)/25, 50, 100);
+        return (_joystickSprite->getPosition().distance(_mainPosition)/BOUNDARY_DISTANCE) * 100;
     }
     else
         
     {
-        return 50.0f;
+        return 0.0f;
     }
     
 }
